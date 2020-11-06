@@ -1,0 +1,30 @@
+<html lang="en"
+	xmlns:="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<h:head>
+		<title>Temperature Converter</title>
+		<h:outputStylesheet library="css" name="styles.css"/>
+	</h:head>
+	
+	<h:body>
+		<div id="container">
+			<h:form>
+				<h:inputText id="celsius" styleClass="cols" value="#{temperatureConverter.celsius}">
+					<f:ajax event="change" listener="#{temperatureConverter.toFahrenheit}" render="fahrenheit" />
+				</h:inputText>
+				
+				<h:outputText id="celsiusLabel" styleClass="cols" value="Celsius = "/>
+				
+				<h:inputText id="fahrenheit" styleClass="cols" value="#{temperatureConverter.fahrenheit}">
+					<f:ajax event="change" listener="#{temperatureConverter.toCelsius}" render="celsius" />
+				</h:inputText>
+				
+				<h:outputText id="fahrenheitLabel" styleClass="cols" value="Fahrenheit"/>
+				
+			</h:form>
+
+		</div>
+	</h:body>
+</html>
