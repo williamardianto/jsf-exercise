@@ -1,0 +1,22 @@
+<html lang="en"
+	xmlns:="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<h:head>
+		<title>Counter</title>
+		<h:outputStylesheet library="css" name="styles.css"/>
+	</h:head>
+	
+	<h:body>
+		<div id="container">
+			<h:outputText id="output" styleClass="cols" value="#{counterBean.count}"/>
+			<h:form>	
+			<h:commandButton id="button" styleClass="cols" value="Count" action="#{counterBean.addCount}">
+				<f:ajax execute="@form" render=":output"/>
+			</h:commandButton>
+			</h:form>
+		</div>
+
+	</h:body>
+</html>
