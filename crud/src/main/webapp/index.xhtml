@@ -1,0 +1,48 @@
+<html lang="en"
+	xmlns:="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui = "http://java.sun.com/jsf/facelets"
+	>
+
+	<h:head>
+		<title>CRUD</title>
+	</h:head>
+	
+	<h:body>
+		<h:form>	
+		    <div>
+		    	<div style="margin:10px;">
+		    		<h:outputText value="Filter prefix: " />
+   		        	<p:inputText value="#{crud.searchString}">
+   		        		<p:ajax  event="keyup" listener="#{crud.search}" update="listbox" />
+   		        	</p:inputText>
+		    	</div>
+		    	<div style="display: flex; flex-direction: row; margin:10px;">
+			   		<p:selectOneListbox id="listbox" value="#{crud.name}" converter="nameConverter" onclick="PF('updateButton').enable();PF('deleteButton').enable();" scrollHeight="100" style="margin-right: 10px; height:100px">
+			             <f:selectItems value="#{crud.names}" var="n" itemLabel="#{n.name}, #{n.surname}" itemValue="#{n}"/>
+			            <p:ajax listener="#{crud.listBoxChange}" update="inputName inputSurname" />
+			        </p:selectOneListbox>
+
+					<div>
+						<div>
+							<h:outputText value="Name: " style="display:inline-block; width:70px; margin-bottom:10px" />
+				        	<p:inputText id="inputName" value="#{crud.inputName}"/>						
+						</div>
+			        	<div>
+		    			    <h:outputText value="Surname: " style="display:inline-block; width:70px;" />
+				        	<p:inputText id="inputSurname" value="#{crud.inputSurname}"/>
+			        	</div>
+					</div>
+
+		    	</div>	
+	        	<div style="margin:10px;">
+		    		<p:commandButton widgetVar="createButton" value="Create" id="create" update="listbox inputName inputSurname" action="#{crud.create}" process="@this,inputName,inputSurname" style="margin-right:10px;"/>
+   		        	<p:commandButton widgetVar="updateButton" value="Update" id="update" update="listbox inputName inputSurname" action="#{crud.update}" process="@this,inputName,inputSurname" style="margin-right:10px;"/>
+   		        	<p:commandButton widgetVar="deleteButton" value="Delete" id="delete" update="listbox inputName inputSurname" action="#{crud.delete}" process="@this,inputName,inputSurname" style="margin-right:10px;"/>
+		    	</div>
+		    </div>
+		</h:form>
+	</h:body>
+</html>

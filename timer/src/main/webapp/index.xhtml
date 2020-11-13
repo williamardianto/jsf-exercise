@@ -1,0 +1,35 @@
+<html lang="en"
+	xmlns:="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui = "http://java.sun.com/jsf/facelets"
+	>
+
+	<h:head>
+		<title>Timer</title>
+		<h:outputStylesheet library="css" name="styles.css"/>
+	</h:head>
+	
+	<h:body>
+		<h:form>	
+			<p:growl id="growl" />
+				
+		    <h:panelGrid columns="1">
+   		        <h:outputText value="Elapsed Time: " />
+			    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{timer.progress}" labelTemplate="{value}%" styleClass="animated" global="false" interval="1000">
+			        <p:ajax event="complete" listener="#{timer.onComplete}" update="growl"/>
+				</p:progressBar>
+		    
+		        <h:outputText id="output" value="#{timer.sliderValue}s" />
+		        <h:inputHidden id="text" value="#{timer.sliderValue}" />
+		        <p:slider for="text" display="output" minValue="0" maxValue="30" step="1" style="width: 300px" displayTemplate="{value}s" >
+		        	<p:ajax listener="#{timer.sliderOnChange}" process="@form" render="pb" />
+		        </p:slider>
+		        
+		        <p:commandButton value="Start" type="button" onclick="PF('pbAjax').start();PF('startButton').disable();"  widgetVar="startButton" style="width: 300px; margin-top:20px;" />
+		        <p:commandButton value="Reset" action="#{timer.reset}" oncomplete="PF('pbAjax').cancel();PF('startButton').enable();" style="width: 300px;"/>
+		    </h:panelGrid>
+		</h:form>
+	</h:body>
+</html>
