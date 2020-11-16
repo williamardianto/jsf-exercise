@@ -6,7 +6,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import com.example.project.model.Name;
+import com.example.model.Name;
 import com.example.view.Crud;
 
 @FacesConverter(value = "nameConverter")

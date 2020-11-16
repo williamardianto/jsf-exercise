@@ -9,8 +9,8 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.example.project.model.Name;
-import com.example.project.service.NameService;
+import com.example.model.Name;
+import com.example.service.NameService;
 
 @Named
 @ViewScoped
